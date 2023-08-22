@@ -29,9 +29,7 @@ function handleInviteButton(interaction) {
 
       const member = interaction.guild?.members.cache.get(userId);
       if (member?.voice.channel) {
-            console.log(member.voice.channel.id, voiceChannelD);
             if (member.voice.channel.id != voiceChannelD) {
-                  console.log("Voice channel changed");
                   const embed = new EmbedBuilder().setTitle("The user who invited you switched the voice channel. You need a new invite");
                   interaction.reply({ embeds: [embed] });
             } else {
