@@ -11,7 +11,7 @@ async function createVC(oldState, newState) {
                         const newChannel = await newState.guild.channels.create({
                               type: ChannelType.GuildVoice,
                               parent: category,
-                              name: member.displayName + "'s VC",
+                              name: process.env.NEW_VC_NAME_FORMAT.replace("[username]", member.displayName),
                         });
 
                         await member.voice.setChannel(newChannel);
@@ -33,7 +33,7 @@ function inviteToVC(interaction) {
 
             interaction.reply({ embeds: [embed] });
       } else {
-            const embed = new EmbedBuilder("VC invite").setDescription(`You have been invited to join ${user.voice.channel.name}'s VC ${userToInvite}`).setColor("#13ed4a");
+            const embed = new EmbedBuilder("VC invite").setDescription(`You have been invited to join ${user.voice.channel.name} ${userToInvite}`).setColor("#13ed4a");
 
             const buttonId = user.id + "-" + user.voice.channel.id + "-" + userToInvite.id + "-" + new Date().getTime();
             const row = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId(buttonId).setLabel("Join").setStyle(ButtonStyle.Primary));
